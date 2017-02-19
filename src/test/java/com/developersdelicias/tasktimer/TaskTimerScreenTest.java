@@ -20,8 +20,6 @@ public class TaskTimerScreenTest {
     private static final int THREE_SECONDS = 3000;
     private FrameFixture window;
 
-
-
     @Before
     public void setUp() {
         window = new FrameFixture(createFrame());
@@ -62,7 +60,7 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_update_second_by_second() throws Exception {
+    public void should_update_second_by_second_the_timer_label() throws Exception {
         clickOnStartButton();
         sleepFor(ONE_SECOND);
         verifyTimeElapsedIs("00:00:01");

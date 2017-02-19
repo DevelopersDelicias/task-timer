@@ -40,21 +40,26 @@ class TaskTimerScreen extends JFrame implements TaskTimerView {
 
     private void init() {
         createComponents();
-        getContentPane().add(mainPanel);
+        addComponents();
     }
 
     private void createComponents() {
         createMainPanel();
         createButtons();
+        createTimeLabel();
+    }
 
-        timeLabel = new JLabel("00:00:00");
-        timeLabel.setName("timeLabel");
-
+    private void addComponents() {
         mainPanel.add(startButton);
         mainPanel.add(pauseButton);
         mainPanel.add(stopButton);
-
         mainPanel.add(timeLabel);
+        getContentPane().add(mainPanel);
+    }
+
+    private void createTimeLabel() {
+        timeLabel = new JLabel("00:00:00");
+        timeLabel.setName("timeLabel");
     }
 
     private void createMainPanel() {
