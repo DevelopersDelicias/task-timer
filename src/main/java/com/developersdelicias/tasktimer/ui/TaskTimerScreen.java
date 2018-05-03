@@ -1,4 +1,4 @@
-package com.developersdelicias.tasktimer;
+package com.developersdelicias.tasktimer.ui;
 
 import com.developersdelicias.tasktimer.format.BasicTimeFormat;
 import com.developersdelicias.tasktimer.format.TimeFormat;
@@ -16,7 +16,7 @@ import static javax.swing.JOptionPane.*;
 import static javax.swing.UIManager.getInstalledLookAndFeels;
 import static javax.swing.UIManager.setLookAndFeel;
 
-class TaskTimerScreen extends JFrame implements TaskTimerView {
+public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final TaskTimer taskTimer;
@@ -27,7 +27,7 @@ class TaskTimerScreen extends JFrame implements TaskTimerView {
     private JLabel timeLabel;
     private final TimeFormat timeFormat;
 
-    TaskTimerScreen() throws HeadlessException {
+    public TaskTimerScreen() throws HeadlessException {
         super("Task Timer Application");
         lookAndFeel();
         setSize(600, 600);

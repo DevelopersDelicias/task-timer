@@ -1,4 +1,4 @@
-package com.developersdelicias.tasktimer;
+package com.developersdelicias.tasktimer.ui;
 
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
