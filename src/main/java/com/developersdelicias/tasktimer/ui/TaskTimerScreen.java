@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +17,7 @@ import static javax.swing.UIManager.setLookAndFeel;
 
 public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
+    private static final String PAUSE_BUTTON_TEXT = "Pause";
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final TaskTimer taskTimer;
     private JPanel mainPanel;
@@ -27,7 +27,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
     private JLabel timeLabel;
     private final TimeFormat timeFormat;
 
-    public TaskTimerScreen() throws HeadlessException {
+    public TaskTimerScreen() {
         super("Task Timer Application");
         lookAndFeel();
         setSize(600, 600);
@@ -72,7 +72,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
         startButton.setName("startButton");
         startButton.addActionListener(new StartActionListener());
 
-        pauseButton = new JButton("Pause");
+        pauseButton = new JButton(PAUSE_BUTTON_TEXT);
         pauseButton.setName("pauseButton");
         pauseButton.setEnabled(false);
         pauseButton.addActionListener(new PauseActionListener());
@@ -100,7 +100,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
     public void initialState() {
         startButton.setEnabled(true);
         pauseButton.setEnabled(false);
-        pauseButton.setText("Pause");
+        pauseButton.setText(PAUSE_BUTTON_TEXT);
         stopButton.setEnabled(false);
         timeLabel.setText(format(0L));
     }
@@ -125,7 +125,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
     @Override
     public void onPlay() {
-        pauseButton.setText("Pause");
+        pauseButton.setText(PAUSE_BUTTON_TEXT);
     }
 
     @Override
