@@ -38,6 +38,5 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests! Skip integration tests for now due they are UI dependent
-      - run: export DISPLAY=:0.0
-      - run: mvn integration-test
+      - run: test
 
