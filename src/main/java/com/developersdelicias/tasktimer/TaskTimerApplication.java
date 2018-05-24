@@ -1,8 +1,7 @@
 package com.developersdelicias.tasktimer;
 
 import com.developersdelicias.tasktimer.ui.TaskTimerScreen;
-
-import javax.swing.*;
+import javax.swing.WindowConstants;
 
 @SuppressWarnings("WeakerAccess")
 public class TaskTimerApplication {

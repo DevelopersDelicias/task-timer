@@ -6,7 +6,6 @@ import junitparams.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

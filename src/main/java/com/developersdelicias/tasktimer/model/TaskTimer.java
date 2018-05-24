@@ -2,7 +2,6 @@ package com.developersdelicias.tasktimer.model;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import static com.developersdelicias.tasktimer.model.TaskTimer.State.PAUSED;
 import static com.developersdelicias.tasktimer.model.TaskTimer.State.RUNNING;
 import static com.developersdelicias.tasktimer.model.TaskTimer.State.STOPPED;

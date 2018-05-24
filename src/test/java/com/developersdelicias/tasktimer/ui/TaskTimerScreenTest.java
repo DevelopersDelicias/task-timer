@@ -7,9 +7,7 @@ import org.assertj.swing.fixture.JOptionPaneFixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.*;
-
+import java.awt.Frame;
 import static org.assertj.swing.timing.Timeout.timeout;
 
 public class TaskTimerScreenTest {

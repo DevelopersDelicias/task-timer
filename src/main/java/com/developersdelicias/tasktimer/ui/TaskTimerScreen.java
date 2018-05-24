@@ -46,6 +46,10 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      */
     private final TaskTimer taskTimer;
     /**
+     * Time Format used.
+     */
+    private final TimeFormat timeFormat;
+    /**
      * The main panel that contains all elements.
      */
     private JPanel mainPanel;
@@ -65,10 +69,6 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      * This label display the current time.
      */
     private JLabel timeLabel;
-    /**
-     * Time Format used.
-     */
-    private final TimeFormat timeFormat;
 
     /**
      * Constructor.
@@ -209,6 +209,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
     /**
      * Applies format to display.
+     *
      * @param timeElapsed The Time elapsed in milliseconds.
      * @return The time with the proper format.
      */
