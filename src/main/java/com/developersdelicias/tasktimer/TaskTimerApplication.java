@@ -4,6 +4,7 @@ import com.developersdelicias.tasktimer.ui.TaskTimerScreen;
 
 import javax.swing.*;
 
+@SuppressWarnings("WeakerAccess")
 public class TaskTimerApplication {
 
     public static void main(String[] args) {

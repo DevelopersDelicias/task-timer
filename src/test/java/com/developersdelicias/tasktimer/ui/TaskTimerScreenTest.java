@@ -27,34 +27,34 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_show_a_button_to_start_the_timer() throws Exception {
+    public void should_show_a_button_to_start_the_timer() {
         startButton().requireText("Start").requireEnabled();
     }
 
     @Test
-    public void should_show_a_button_to_pause_the_timer() throws Exception {
+    public void should_show_a_button_to_pause_the_timer() {
         pauseButton().requireText("Pause").requireDisabled();
     }
 
     @Test
-    public void should_show_a_button_to_stop_the_timer() throws Exception {
+    public void should_show_a_button_to_stop_the_timer() {
         stopButton().requireText("Stop").requireDisabled();
     }
 
     @Test
-    public void should_disable_start_button_when_is_clicked() throws Exception {
+    public void should_disable_start_button_when_is_clicked() {
         clickOnStartButton();
         startButton().requireDisabled();
     }
 
     @Test
-    public void should_enable_pause_button_when_click_on_start_button() throws Exception {
+    public void should_enable_pause_button_when_click_on_start_button() {
         clickOnStartButton();
         pauseButton().requireEnabled();
     }
 
     @Test
-    public void should_enable_stop_button_when_click_on_start_button() throws Exception {
+    public void should_enable_stop_button_when_click_on_start_button() {
         clickOnStartButton();
         stopButton().requireEnabled();
     }
@@ -71,7 +71,7 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_change_text_to_play_when_pause_is_clicked() throws Exception {
+    public void should_change_text_to_play_when_pause_is_clicked() {
         clickOnStartButton();
         clickOnPauseButton();
         pauseButton().requireText("Play");
@@ -90,7 +90,7 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_change_text_to_pause_when_play_is_clicked() throws Exception {
+    public void should_change_text_to_pause_when_play_is_clicked() {
         clickOnStartButton();
         clickOnPauseButton();
         clickOnPauseButton();
@@ -98,7 +98,7 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_show_a_confirmation_message_when_stop_is_clicked() throws Exception {
+    public void should_show_a_confirmation_message_when_stop_is_clicked() {
         clickOnStartButton();
         clickOnStopButton();
         optionPane().requireMessage("Are you sure to stop the timer?").requireQuestionMessage();
@@ -119,7 +119,7 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_have_a_label_to_display_the_time() throws Exception {
+    public void should_have_a_label_to_display_the_time() {
         verifyTimeElapsedIs(INITIAL_TIME);
     }
 
