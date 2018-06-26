@@ -1,24 +1,28 @@
 package com.developersdelicias.tasktimer.ui;
 
-import com.developersdelicias.tasktimer.format.BasicTimeFormat;
-import com.developersdelicias.tasktimer.format.TimeFormat;
-import com.developersdelicias.tasktimer.model.TaskTimer;
-import com.developersdelicias.tasktimer.model.TaskTimerView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
+import static javax.swing.JOptionPane.showConfirmDialog;
+import static javax.swing.UIManager.getInstalledLookAndFeels;
+import static javax.swing.UIManager.setLookAndFeel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.UIManager.getInstalledLookAndFeels;
-import static javax.swing.UIManager.setLookAndFeel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.developersdelicias.tasktimer.format.BasicTimeFormat;
+import com.developersdelicias.tasktimer.format.TimeFormat;
+import com.developersdelicias.tasktimer.model.TaskTimer;
+import com.developersdelicias.tasktimer.model.TaskTimerView;
 
 /**
  * Represents the Main Screen of Task Timer Application.
@@ -184,11 +188,8 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
     @Override
     public final boolean shouldStop() {
-        int option = showConfirmDialog(
-                TaskTimerScreen.this,
-                "Are you sure to stop the timer?",
-                "Task Timer", YES_NO_OPTION
-        );
+        int option = showConfirmDialog(TaskTimerScreen.this,
+                "Are you sure to stop the timer?", "Task Timer", YES_NO_OPTION);
         return option == YES_OPTION;
     }
 
@@ -210,7 +211,8 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
     /**
      * Applies format to display.
      *
-     * @param timeElapsed The Time elapsed in milliseconds.
+     * @param timeElapsed
+     *            The Time elapsed in milliseconds.
      * @return The time with the proper format.
      */
     private String format(final long timeElapsed) {
