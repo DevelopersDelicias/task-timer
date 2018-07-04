@@ -44,11 +44,11 @@ public class TaskTimer {
     /**
      * Timer reference.
      *
-     * @param view
+     * @param aView
      *            Is an implementation of the Task Timer View model object.
      */
-    public TaskTimer(final TaskTimerView view) {
-        this.view = view;
+    public TaskTimer(final TaskTimerView aView) {
+        this.view = aView;
         this.view.initialState();
     }
 

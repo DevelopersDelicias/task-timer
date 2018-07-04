@@ -8,7 +8,14 @@ import com.developersdelicias.tasktimer.ui.TaskTimerScreen;
  * This class will be the implementation of the application.
  */
 @SuppressWarnings("WeakerAccess")
-public class TaskTimerApplication {
+public final class TaskTimerApplication {
+
+    /**
+     * Can't be instantiated directly.
+     */
+    private TaskTimerApplication() {
+
+    }
 
     /**
      * Main method of the application.
