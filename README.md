@@ -24,3 +24,6 @@ This is a very simple Swing Application that is used to help to have a timer tha
 3. Once Task timer is imported build the project and check for build errors.
 4. Go to Run> Run Configurations> Maven Build> New Run Configuration.
 5. Creating and running the task timer run configuration should allow you to run the JUnit test cases.
+
+### IntelliJ
+TBC
