@@ -8,6 +8,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
  * Implements Basic Time Format using hh:mm:ss.
  */
 public class BasicTimeFormat implements TimeFormat {
+
     @Override
     public final String format(final long milliseconds) {
         final long hr = MILLISECONDS.toHours(milliseconds);

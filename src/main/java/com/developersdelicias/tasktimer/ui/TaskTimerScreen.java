@@ -36,15 +36,15 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
     /**
      * The logger.
      */
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final transient Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * A reference to TaskTimer model object.
      */
-    private final TaskTimer taskTimer;
+    private final transient TaskTimer taskTimer;
     /**
      * Time Format used.
      */
-    private final TimeFormat timeFormat;
+    private final transient TimeFormat timeFormat;
     /**
      * The main panel that contains all elements.
      */
