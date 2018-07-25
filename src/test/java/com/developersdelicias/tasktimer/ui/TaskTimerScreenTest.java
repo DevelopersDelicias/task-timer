@@ -1,12 +1,17 @@
 package com.developersdelicias.tasktimer.ui;
 
+import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.fixture.DialogFixture;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.fixture.JButtonFixture;
 import org.assertj.swing.fixture.JOptionPaneFixture;
+import org.assertj.swing.timing.Timeout;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import javax.swing.JButton;
+import java.awt.Dialog;
 import java.awt.Frame;
 import static org.assertj.swing.timing.Timeout.timeout;
 
@@ -41,25 +46,25 @@ public class TaskTimerScreenTest {
 
     @Test
     public void should_disable_start_button_when_is_clicked() {
-        clickOnStartButton();
+        startAnyTask();
         startButton().requireDisabled();
     }
 
     @Test
     public void should_enable_pause_button_when_click_on_start_button() {
-        clickOnStartButton();
+        startAnyTask();
         pauseButton().requireEnabled();
     }
 
     @Test
     public void should_enable_stop_button_when_click_on_start_button() {
-        clickOnStartButton();
+        startAnyTask();
         stopButton().requireEnabled();
     }
 
     @Test
     public void should_update_second_by_second_the_timer_label() throws Exception {
-        clickOnStartButton();
+        startAnyTask();
         sleepFor(ONE_SECOND);
         verifyTimeElapsedIs("00:00:01");
         sleepFor(ONE_SECOND);
@@ -70,14 +75,14 @@ public class TaskTimerScreenTest {
 
     @Test
     public void should_change_text_to_play_when_pause_is_clicked() {
-        clickOnStartButton();
+        startAnyTask();
         clickOnPauseButton();
         pauseButton().requireText("Play");
     }
 
     @Test
     public void should_pause_and_play() throws Exception {
-        clickOnStartButton();
+        startAnyTask();
         sleepFor(THREE_SECONDS);
         clickOnPauseButton();
         verifyTimeElapsedIs("00:00:03");
@@ -89,7 +94,7 @@ public class TaskTimerScreenTest {
 
     @Test
     public void should_change_text_to_pause_when_play_is_clicked() {
-        clickOnStartButton();
+        startAnyTask();
         clickOnPauseButton();
         clickOnPauseButton();
         pauseButton().requireText("Pause");
@@ -97,17 +102,16 @@ public class TaskTimerScreenTest {
 
     @Test
     public void should_show_a_confirmation_message_when_stop_is_clicked() {
-        clickOnStartButton();
+        startAnyTask();
         clickOnStopButton();
         optionPane().requireMessage("Are you sure to stop the timer?").requireQuestionMessage();
     }
 
     @Test
     public void should_reset_screen_when_user_stops_the_timer() throws Exception {
-        clickOnStartButton();
+        startAnyTask();
         sleepFor(TWO_SECONDS);
-        clickOnStopButton();
-        optionPane().yesButton().click();
+        stopTask();
         startButton().requireEnabled();
         pauseButton().requireDisabled().requireText("Pause");
         stopButton().requireDisabled();
@@ -121,9 +125,66 @@ public class TaskTimerScreenTest {
         verifyTimeElapsedIs(INITIAL_TIME);
     }
 
+    @Test
+    public void should_prompt_an_input_message_to_capture_task_description() {
+        clickOnStartButton();
+
+        DialogFixture dialog = window.dialog(new GenericTypeMatcher<Dialog>(Dialog.class) {
+            @Override
+            protected boolean isMatching(Dialog dialog) {
+                return "Create Task".equals(dialog.getTitle()) && dialog.isVisible()
+                        ;
+            }
+        }, Timeout.timeout(1000));
+        dialog.textBox().enterText("Task #1");
+        clickOnOkButton(dialog);
+
+        windowTitleShouldBe("Task Timer Application - Task #1");
+    }
+
+    @Test
+    public void should_not_append_multiple_times_the_task_description_to_title() {
+        startTaskWithDescription("Task #1");
+        windowTitleShouldBe("Task Timer Application - Task #1");
+        stopTask();
+        startTaskWithDescription("Task #2");
+        windowTitleShouldBe("Task Timer Application - Task #2");
+    }
+
     @After
     public void tearDown() {
         window.cleanUp();
+    }
+
+    private void windowTitleShouldBe(String windowTitle) {
+        window.requireTitle(windowTitle);
+    }
+
+    private void startTaskWithDescription(String taskDescription) {
+        clickOnStartButton();
+        DialogFixture dialog = window.dialog(Timeout.timeout(1000));
+        dialog.textBox().setText(taskDescription);
+        clickOnOkButton(dialog);
+    }
+
+    private void clickOnOkButton(DialogFixture dialog) {
+        dialog.button(
+                new GenericTypeMatcher<JButton>(JButton.class) {
+                    @Override
+                    protected boolean isMatching(JButton jButton) {
+                        return "OK".equals(jButton.getText());
+                    }
+                }
+        ).click();
+    }
+
+    private void stopTask() {
+        clickOnStopButton();
+        optionPane().yesButton().click();
+    }
+
+    private void startAnyTask() {
+        startTaskWithDescription("A Task");
     }
 
     private JOptionPaneFixture optionPane() {

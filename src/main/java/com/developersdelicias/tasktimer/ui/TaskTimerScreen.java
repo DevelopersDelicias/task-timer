@@ -34,6 +34,10 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      */
     private static final int SCREEN_HEIGHT = 600;
     /**
+     * Title that appears at the top of the Window.
+     */
+    private static final String WINDOW_TITLE = "Task Timer Application";
+    /**
      * The logger.
      */
     private final transient Logger logger = LoggerFactory.getLogger(getClass());
@@ -70,7 +74,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      * Constructor.
      */
     public TaskTimerScreen() {
-        super("Task Timer Application");
+        super(WINDOW_TITLE);
         lookAndFeel();
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setResizable(false);
@@ -219,8 +223,21 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
+            String taskDescription = askTaskDescription();
+
+            setTitle(WINDOW_TITLE + " - " + taskDescription);
             taskTimer.start();
         }
+    }
+
+    /**
+     * Displays an input dialog to the user to have the task description.
+     *
+     * @return The input value from the user.
+     */
+    private String askTaskDescription() {
+        return JOptionPane.showInputDialog(null, null,
+                "Create Task", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
