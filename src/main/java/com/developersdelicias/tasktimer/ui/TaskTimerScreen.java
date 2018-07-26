@@ -236,8 +236,10 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      * @return The input value from the user.
      */
     private String askTaskDescription() {
-        return JOptionPane.showInputDialog(null, null,
-                "Create Task", JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showInputDialog(
+                null, "Enter task description",
+                "Create Task", JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     /**

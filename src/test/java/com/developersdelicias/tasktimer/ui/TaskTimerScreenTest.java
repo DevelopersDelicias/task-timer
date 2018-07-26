@@ -137,6 +137,7 @@ public class TaskTimerScreenTest {
             }
         }, Timeout.timeout(1000));
         dialog.textBox().enterText("Task #1");
+        dialog.label("OptionPane.label").requireText("Enter task description");
         clickOnOkButton(dialog);
 
         windowTitleShouldBe("Task Timer Application - Task #1");
