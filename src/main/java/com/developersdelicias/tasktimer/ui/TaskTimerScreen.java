@@ -261,6 +261,7 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
         @Override
         public void actionPerformed(final ActionEvent e) {
             taskTimer.stop();
+            setTitle(WINDOW_TITLE);
         }
     }
 }

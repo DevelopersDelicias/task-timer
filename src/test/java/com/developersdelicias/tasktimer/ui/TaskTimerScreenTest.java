@@ -154,6 +154,13 @@ public class TaskTimerScreenTest {
         windowTitleShouldBe("Task Timer Application - Task #2");
     }
 
+    @Test
+    public void should_clear_title_when_timer_is_stopped() {
+        startAnyTask();
+        stopTask();
+        windowTitleShouldBe("Task Timer Application");
+    }
+
     @After
     public void tearDown() {
         window.cleanUp();
