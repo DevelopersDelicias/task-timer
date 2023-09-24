@@ -18,7 +18,7 @@
         <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
-		<jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
     </properties>
     <name>task-timer</name>
     <url>http://maven.apache.org</url>
