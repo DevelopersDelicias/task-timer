@@ -23,6 +23,7 @@ public class TaskTimerScreenTest {
     private static final int ONE_SECOND = 1000;
     private static final int TWO_SECONDS = 2000;
     private static final int THREE_SECONDS = 3000;
+    private static final Timeout ONE_SECOND_TIMEOUT = Timeout.timeout(ONE_SECOND);
     private FrameFixture window;
 
     @Before
@@ -137,7 +138,7 @@ public class TaskTimerScreenTest {
                 return "Create Task".equals(dialog.getTitle()) && dialog.isVisible()
                         ;
             }
-        }, Timeout.timeout(1000));
+        }, ONE_SECOND_TIMEOUT);
         dialog.textBox().enterText("Task #1");
         dialog.label("OptionPane.label").requireText("Enter task description");
         clickOnOkButton(dialog);
@@ -172,7 +173,7 @@ public class TaskTimerScreenTest {
 
     private void startTaskWithDescription(String taskDescription) {
         clickOnStartButton();
-        DialogFixture dialog = window.dialog(Timeout.timeout(1000));
+        DialogFixture dialog = window.dialog(ONE_SECOND_TIMEOUT);
         dialog.textBox().setText(taskDescription);
         clickOnOkButton(dialog);
     }
