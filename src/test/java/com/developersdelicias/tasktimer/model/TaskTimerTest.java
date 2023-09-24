@@ -2,10 +2,13 @@ package com.developersdelicias.tasktimer.model;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class TaskTimerTest {
 
@@ -14,18 +17,18 @@ public class TaskTimerTest {
     private TaskTimerView view;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         view = mock(TaskTimerView.class);
         taskTimer = new TaskTimer(view);
     }
 
     @Test
-    public void should_be_stopped_by_default() throws Exception {
+    public void should_be_stopped_by_default() {
         assertFalse(taskTimer.isRunning());
     }
 
     @Test
-    public void should_inform_viewer_to_prepare_initial_states() throws Exception {
+    public void should_inform_viewer_to_prepare_initial_states() {
         verify(view).initialState();
     }
 
@@ -39,18 +42,18 @@ public class TaskTimerTest {
     }
 
     @Test(expected = TaskTimerAlreadyStartedException.class)
-    public void should_throw_illegal_operation_exception_when_starts_two_times() throws Exception {
+    public void should_throw_illegal_operation_exception_when_starts_two_times() {
         taskTimer.start();
         taskTimer.start();
     }
 
     @Test(expected = TaskTimerAlreadyStoppedException.class)
-    public void should_throw_already_stopped_exception() throws Exception {
+    public void should_throw_already_stopped_exception() {
         taskTimer.stop();
     }
 
     @Test
-    public void should_stop_a_timer() throws Exception {
+    public void should_stop_a_timer() {
         when(view.shouldStop()).thenReturn(true);
         taskTimer.start();
         taskTimer.stop();
@@ -59,7 +62,7 @@ public class TaskTimerTest {
     }
 
     @Test
-    public void should_pause_a_timer() throws Exception {
+    public void should_pause_a_timer() {
         taskTimer.start();
         taskTimer.togglePauseAndPlay();
         assertFalse(taskTimer.isRunning());
@@ -67,19 +70,19 @@ public class TaskTimerTest {
     }
 
     @Test(expected = TaskTimerAlreadyPausedException.class)
-    public void should_throw_already_paused_exception() throws Exception {
+    public void should_throw_already_paused_exception() {
         taskTimer.start();
         taskTimer.togglePauseAndPlay();
         taskTimer.pause();
     }
 
     @Test
-    public void should_be_not_paused_by_default() throws Exception {
+    public void should_be_not_paused_by_default() {
         assertFalse(taskTimer.isPaused());
     }
 
     @Test
-    public void should_play_a_paused_timer() throws Exception {
+    public void should_play_a_paused_timer() {
         taskTimer.start();
         taskTimer.togglePauseAndPlay();
         taskTimer.togglePauseAndPlay();
@@ -90,13 +93,13 @@ public class TaskTimerTest {
     }
 
     @Test(expected = TaskTimerCannotPlayException.class)
-    public void should_throw_cannot_play_exception() throws Exception {
+    public void should_throw_cannot_play_exception() {
         taskTimer.start();
         taskTimer.play();
     }
 
     @Test(expected = TaskTimerCannotPlayException.class)
-    public void should_throw_cannot_play_exception_by_default() throws Exception {
+    public void should_throw_cannot_play_exception_by_default() {
         taskTimer.play();
     }
 }
