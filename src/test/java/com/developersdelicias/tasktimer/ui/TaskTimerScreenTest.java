@@ -13,6 +13,8 @@ import org.junit.Test;
 import javax.swing.JButton;
 import java.awt.Dialog;
 import java.awt.Frame;
+import java.util.List;
+
 import static org.assertj.swing.timing.Timeout.timeout;
 
 public class TaskTimerScreenTest {
@@ -172,8 +174,8 @@ public class TaskTimerScreenTest {
         dialog.button(
                 new GenericTypeMatcher<JButton>(JButton.class) {
                     @Override
-                    protected boolean isMatching(JButton jButton) {
-                        return "OK".equals(jButton.getText());
+                    protected boolean isMatching(JButton button) {
+                        return List.of("OK", "Aceptar").contains(button.getText());
                     }
                 }
         ).click();
