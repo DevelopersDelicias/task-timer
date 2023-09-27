@@ -34,17 +34,26 @@ public class TaskTimerScreenTest {
 
     @Test
     public void should_show_a_button_to_start_the_timer() {
-        startButton().requireText("Start").requireEnabled();
+        startButton()
+            .requireText("Start")
+            .requireEnabled()
+            .requireToolTip("Click to start the timer");
     }
 
     @Test
     public void should_show_a_button_to_pause_the_timer() {
-        pauseButton().requireText("Pause").requireDisabled();
+        pauseButton()
+            .requireText("Pause")
+            .requireDisabled()
+            .requireToolTip("Click to pause the timer");
     }
 
     @Test
     public void should_show_a_button_to_stop_the_timer() {
-        stopButton().requireText("Stop").requireDisabled();
+        stopButton()
+            .requireText("Stop")
+            .requireDisabled()
+            .requireToolTip("Click to stop the timer");
     }
 
     @Test
@@ -80,7 +89,9 @@ public class TaskTimerScreenTest {
     public void should_change_text_to_play_when_pause_is_clicked() {
         startAnyTask();
         clickOnPauseButton();
-        pauseButton().requireText("Play");
+        pauseButton()
+            .requireText("Play")
+            .requireToolTip("Click to resume the timer");
     }
 
     @Test
@@ -100,7 +111,9 @@ public class TaskTimerScreenTest {
         startAnyTask();
         clickOnPauseButton();
         clickOnPauseButton();
-        pauseButton().requireText("Pause");
+        pauseButton()
+            .requireText("Pause")
+            .requireToolTip("Click to pause the timer");
     }
 
     @Test
