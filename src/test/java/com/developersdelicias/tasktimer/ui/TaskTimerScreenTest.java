@@ -132,13 +132,7 @@ public class TaskTimerScreenTest {
     public void should_prompt_an_input_message_to_capture_task_description() {
         clickOnStartButton();
 
-        DialogFixture dialog = window.dialog(new GenericTypeMatcher<Dialog>(Dialog.class) {
-            @Override
-            protected boolean isMatching(Dialog dialog) {
-                return "Create Task".equals(dialog.getTitle()) && dialog.isVisible()
-                        ;
-            }
-        }, ONE_SECOND_TIMEOUT);
+        DialogFixture dialog = createTaskDialog();
         dialog.textBox().enterText("Task #1");
         dialog.label("OptionPane.label").requireText("Enter task description");
         clickOnOkButton(dialog);
@@ -162,9 +156,31 @@ public class TaskTimerScreenTest {
         windowTitleShouldBe("Task Timer Application");
     }
 
+    @Test
+    public void should_not_start_timer_if_user_cancel_dialog() {
+        clickOnStartButton();
+        cancelCreateTaskDialog();
+        windowTitleShouldBe("Task Timer Application");
+    }
+
     @After
     public void tearDown() {
         window.cleanUp();
+    }
+
+    private void cancelCreateTaskDialog() {
+        clickOnCancelButton(createTaskDialog());
+    }
+
+    private DialogFixture createTaskDialog() {
+        DialogFixture dialog = window.dialog(new GenericTypeMatcher<Dialog>(Dialog.class) {
+            @Override
+            protected boolean isMatching(Dialog dialog) {
+                return "Create Task".equals(dialog.getTitle()) && dialog.isVisible()
+                        ;
+            }
+        }, ONE_SECOND_TIMEOUT);
+        return dialog;
     }
 
     private void windowTitleShouldBe(String windowTitle) {
@@ -184,6 +200,17 @@ public class TaskTimerScreenTest {
                     @Override
                     protected boolean isMatching(JButton button) {
                         return List.of("OK", "Aceptar").contains(button.getText());
+                    }
+                }
+        ).click();
+    }
+
+    private void clickOnCancelButton(DialogFixture dialog) {
+        dialog.button(
+                new GenericTypeMatcher<JButton>(JButton.class) {
+                    @Override
+                    protected boolean isMatching(JButton button) {
+                        return List.of("Cancel", "Cancelar").contains(button.getText());
                     }
                 }
         ).click();

@@ -225,6 +225,10 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
         public void actionPerformed(final ActionEvent e) {
             String taskDescription = askTaskDescription();
 
+            if (taskDescription == null) {
+                return;
+            }
+
             setTitle(WINDOW_TITLE + " - " + taskDescription);
             taskTimer.start();
         }
