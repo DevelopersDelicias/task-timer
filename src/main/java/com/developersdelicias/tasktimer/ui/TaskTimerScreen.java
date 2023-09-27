@@ -134,15 +134,18 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
     private void createButtons() {
         startButton = new JButton("Start");
         startButton.setName("startButton");
+        startButton.setToolTipText("Click to start the timer");
         startButton.addActionListener(new StartActionListener());
 
         pauseButton = new JButton(PAUSE_BUTTON_TEXT);
         pauseButton.setName("pauseButton");
+        pauseButton.setToolTipText("Click to pause the timer");
         pauseButton.setEnabled(false);
         pauseButton.addActionListener(new PauseActionListener());
 
         stopButton = new JButton("Stop");
         stopButton.setName("stopButton");
+        stopButton.setToolTipText("Click to stop the timer");
         stopButton.setEnabled(false);
         stopButton.addActionListener(new StopActionListener());
     }
@@ -194,11 +197,13 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
     @Override
     public final void onPause() {
         pauseButton.setText("Play");
+        pauseButton.setToolTipText("Click to resume the timer");
     }
 
     @Override
     public final void onPlay() {
         pauseButton.setText(PAUSE_BUTTON_TEXT);
+        pauseButton.setToolTipText("Click to pause the timer");
     }
 
     @Override
