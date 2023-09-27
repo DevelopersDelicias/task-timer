@@ -1,5 +1,11 @@
 package com.developersdelicias.tasktimer.ui;
 
+import static org.assertj.swing.timing.Timeout.timeout;
+
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.util.List;
+import javax.swing.JButton;
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.DialogFixture;
@@ -10,12 +16,6 @@ import org.assertj.swing.timing.Timeout;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import javax.swing.JButton;
-import java.awt.Dialog;
-import java.awt.Frame;
-import java.util.List;
-
-import static org.assertj.swing.timing.Timeout.timeout;
 
 public class TaskTimerScreenTest {
 
@@ -23,7 +23,9 @@ public class TaskTimerScreenTest {
     private static final int ONE_SECOND = 1000;
     private static final int TWO_SECONDS = 2000;
     private static final int THREE_SECONDS = 3000;
-    private static final Timeout ONE_SECOND_TIMEOUT = Timeout.timeout(ONE_SECOND);
+    private static final Timeout ONE_SECOND_TIMEOUT = Timeout.timeout(
+        ONE_SECOND
+    );
     private FrameFixture window;
 
     @Before
@@ -75,7 +77,8 @@ public class TaskTimerScreenTest {
     }
 
     @Test
-    public void should_update_second_by_second_the_timer_label() throws Exception {
+    public void should_update_second_by_second_the_timer_label()
+        throws Exception {
         startAnyTask();
         sleepFor(ONE_SECOND);
         verifyTimeElapsedIs("00:00:01");
@@ -120,11 +123,14 @@ public class TaskTimerScreenTest {
     public void should_show_a_confirmation_message_when_stop_is_clicked() {
         startAnyTask();
         clickOnStopButton();
-        optionPane().requireMessage("Are you sure to stop the timer?").requireQuestionMessage();
+        optionPane()
+            .requireMessage("Are you sure to stop the timer?")
+            .requireQuestionMessage();
     }
 
     @Test
-    public void should_reset_screen_when_user_stops_the_timer() throws Exception {
+    public void should_reset_screen_when_user_stops_the_timer()
+        throws Exception {
         startAnyTask();
         sleepFor(TWO_SECONDS);
         stopTask();
@@ -186,13 +192,18 @@ public class TaskTimerScreenTest {
     }
 
     private DialogFixture createTaskDialog() {
-        DialogFixture dialog = window.dialog(new GenericTypeMatcher<Dialog>(Dialog.class) {
-            @Override
-            protected boolean isMatching(Dialog dialog) {
-                return "Create Task".equals(dialog.getTitle()) && dialog.isVisible()
-                        ;
-            }
-        }, ONE_SECOND_TIMEOUT);
+        DialogFixture dialog = window.dialog(
+            new GenericTypeMatcher<Dialog>(Dialog.class) {
+                @Override
+                protected boolean isMatching(Dialog dialog) {
+                    return (
+                        "Create Task".equals(dialog.getTitle()) &&
+                        dialog.isVisible()
+                    );
+                }
+            },
+            ONE_SECOND_TIMEOUT
+        );
         return dialog;
     }
 
@@ -208,25 +219,33 @@ public class TaskTimerScreenTest {
     }
 
     private void clickOnOkButton(DialogFixture dialog) {
-        dialog.button(
+        dialog
+            .button(
                 new GenericTypeMatcher<JButton>(JButton.class) {
                     @Override
                     protected boolean isMatching(JButton button) {
-                        return List.of("OK", "Aceptar").contains(button.getText());
+                        return List
+                            .of("OK", "Aceptar")
+                            .contains(button.getText());
                     }
                 }
-        ).click();
+            )
+            .click();
     }
 
     private void clickOnCancelButton(DialogFixture dialog) {
-        dialog.button(
+        dialog
+            .button(
                 new GenericTypeMatcher<JButton>(JButton.class) {
                     @Override
                     protected boolean isMatching(JButton button) {
-                        return List.of("Cancel", "Cancelar").contains(button.getText());
+                        return List
+                            .of("Cancel", "Cancelar")
+                            .contains(button.getText());
                     }
                 }
-        ).click();
+            )
+            .click();
     }
 
     private void stopTask() {

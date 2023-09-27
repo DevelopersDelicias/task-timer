@@ -14,7 +14,8 @@ public class BasicTimeFormat implements TimeFormat {
         final long hr = MILLISECONDS.toHours(milliseconds);
         final long min = MILLISECONDS.toMinutes(subtract(milliseconds, hr));
         final long sec = MILLISECONDS.toSeconds(
-                subtract(milliseconds, hr) - MINUTES.toMillis(min));
+            subtract(milliseconds, hr) - MINUTES.toMillis(min)
+        );
         return String.format("%02d:%02d:%02d", hr, min, sec);
     }
 
