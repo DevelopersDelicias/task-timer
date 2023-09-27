@@ -11,6 +11,7 @@ import java.util.TimerTask;
  * This class will handle the different task timer states.
  */
 public class TaskTimer {
+
     /**
      * A reference to TaskTimerView model object.
      */
@@ -70,13 +71,17 @@ public class TaskTimer {
      */
     private void updateView() {
         timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                elapsedTime = System.currentTimeMillis() - initialTime;
-                view.updateTime(elapsedTime);
-            }
-        }, TIMER_DELAY, TIMER_PERIOD);
+        timer.scheduleAtFixedRate(
+            new TimerTask() {
+                @Override
+                public void run() {
+                    elapsedTime = System.currentTimeMillis() - initialTime;
+                    view.updateTime(elapsedTime);
+                }
+            },
+            TIMER_DELAY,
+            TIMER_PERIOD
+        );
     }
 
     /**
@@ -133,7 +138,6 @@ public class TaskTimer {
      * @return the actualState as PAUSED.
      */
     final boolean isPaused() {
-
         return actualState == PAUSED;
     }
 

@@ -4,17 +4,18 @@ import com.developersdelicias.tasktimer.format.BasicTimeFormat;
 import com.developersdelicias.tasktimer.format.TimeFormat;
 import com.developersdelicias.tasktimer.model.TaskTimer;
 import com.developersdelicias.tasktimer.model.TaskTimerView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents the Main Screen of Task Timer Application.
@@ -155,18 +156,22 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      */
     private void lookAndFeel() {
         try {
-            for (UIManager.LookAndFeelInfo info
-                    : UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
+            for (LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(laf.getName())) {
+                    UIManager.setLookAndFeel(laf.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            final String msg = "Could not apply look and feel style. "
-                    + "Native Style will be used";
-            logger.warn(msg, ex);
+        } catch (
+            ClassNotFoundException
+            | InstantiationException
+            | IllegalAccessException
+            | UnsupportedLookAndFeelException ex
+        ) {
+            logger.warn(
+                "Can't apply look and feel style. Native Style will be used",
+                ex
+            );
         }
     }
 
@@ -188,9 +193,12 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
 
     @Override
     public final boolean shouldStop() {
-        int option = JOptionPane.showConfirmDialog(this,
-                "Are you sure to stop the timer?", "Task Timer",
-                JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure to stop the timer?",
+            "Task Timer",
+            JOptionPane.YES_NO_OPTION
+        );
         return option == JOptionPane.YES_OPTION;
     }
 
@@ -246,8 +254,10 @@ public class TaskTimerScreen extends JFrame implements TaskTimerView {
      */
     private String askTaskDescription() {
         return JOptionPane.showInputDialog(
-                null, "Enter task description",
-                "Create Task", JOptionPane.INFORMATION_MESSAGE
+            null,
+            "Enter task description",
+            "Create Task",
+            JOptionPane.INFORMATION_MESSAGE
         );
     }
 

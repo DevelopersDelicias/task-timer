@@ -1,8 +1,7 @@
 package com.developersdelicias.tasktimer;
 
-import javax.swing.WindowConstants;
-
 import com.developersdelicias.tasktimer.ui.TaskTimerScreen;
+import javax.swing.WindowConstants;
 
 /**
  * This class will be the implementation of the application.
@@ -14,7 +13,7 @@ public final class TaskTimerApplication {
      * Can't be instantiated directly.
      */
     private TaskTimerApplication() {
-
+        // empty constructor
     }
 
     /**
