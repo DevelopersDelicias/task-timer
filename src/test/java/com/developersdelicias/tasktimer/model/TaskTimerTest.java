@@ -8,6 +8,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.developersdelicias.tasktimer.model.exception.AlreadyPausedException;
+import com.developersdelicias.tasktimer.model.exception.AlreadyStartedException;
+import com.developersdelicias.tasktimer.model.exception.AlreadyStoppedException;
+import com.developersdelicias.tasktimer.model.exception.CannotPlayException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,13 +46,13 @@ public class TaskTimerTest {
         verify(view, times(3)).updateTime(anyLong());
     }
 
-    @Test(expected = TaskTimerAlreadyStartedException.class)
+    @Test(expected = AlreadyStartedException.class)
     public void should_throw_illegal_operation_exception_when_starts_two_times() {
         taskTimer.start();
         taskTimer.start();
     }
 
-    @Test(expected = TaskTimerAlreadyStoppedException.class)
+    @Test(expected = AlreadyStoppedException.class)
     public void should_throw_already_stopped_exception() {
         taskTimer.stop();
     }
@@ -70,7 +74,7 @@ public class TaskTimerTest {
         assertTrue(taskTimer.isPaused());
     }
 
-    @Test(expected = TaskTimerAlreadyPausedException.class)
+    @Test(expected = AlreadyPausedException.class)
     public void should_throw_already_paused_exception() {
         taskTimer.start();
         taskTimer.togglePauseAndPlay();
@@ -93,13 +97,13 @@ public class TaskTimerTest {
         verify(view).onPlay();
     }
 
-    @Test(expected = TaskTimerCannotPlayException.class)
+    @Test(expected = CannotPlayException.class)
     public void should_throw_cannot_play_exception() {
         taskTimer.start();
         taskTimer.play();
     }
 
-    @Test(expected = TaskTimerCannotPlayException.class)
+    @Test(expected = CannotPlayException.class)
     public void should_throw_cannot_play_exception_by_default() {
         taskTimer.play();
     }

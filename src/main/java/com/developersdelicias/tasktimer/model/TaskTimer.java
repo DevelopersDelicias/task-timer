@@ -4,6 +4,10 @@ import static com.developersdelicias.tasktimer.model.TaskTimer.State.PAUSED;
 import static com.developersdelicias.tasktimer.model.TaskTimer.State.RUNNING;
 import static com.developersdelicias.tasktimer.model.TaskTimer.State.STOPPED;
 
+import com.developersdelicias.tasktimer.model.exception.AlreadyPausedException;
+import com.developersdelicias.tasktimer.model.exception.AlreadyStartedException;
+import com.developersdelicias.tasktimer.model.exception.AlreadyStoppedException;
+import com.developersdelicias.tasktimer.model.exception.CannotPlayException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -58,7 +62,7 @@ public class TaskTimer {
      */
     public final void start() {
         if (actualState == RUNNING) {
-            throw new TaskTimerAlreadyStartedException();
+            throw new AlreadyStartedException();
         }
         actualState = RUNNING;
         initialTime = System.currentTimeMillis();
@@ -89,7 +93,7 @@ public class TaskTimer {
      */
     final void pause() {
         if (actualState == PAUSED) {
-            throw new TaskTimerAlreadyPausedException();
+            throw new AlreadyPausedException();
         }
         actualState = PAUSED;
         timer.cancel();
@@ -101,7 +105,7 @@ public class TaskTimer {
      */
     final void play() {
         if (!isPaused()) {
-            throw new TaskTimerCannotPlayException();
+            throw new CannotPlayException();
         }
         actualState = RUNNING;
         view.onPlay();
@@ -114,7 +118,7 @@ public class TaskTimer {
      */
     public final void stop() {
         if (actualState == STOPPED) {
-            throw new TaskTimerAlreadyStoppedException();
+            throw new AlreadyStoppedException();
         }
         if (view.shouldStop()) {
             actualState = STOPPED;
