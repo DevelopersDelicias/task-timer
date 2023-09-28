@@ -18,6 +18,7 @@
         <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <plugin.prettier.goal>write</plugin.prettier.goal>
+        <plugin.jacoco.version>0.8.8</plugin.jacoco.version>
     </properties>
     <name>task-timer</name>
     <url>http://maven.apache.org</url>
@@ -225,6 +226,25 @@
                         <phase>validate</phase>
                         <goals>
                             <goal>${plugin.prettier.goal}</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${plugin.jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
