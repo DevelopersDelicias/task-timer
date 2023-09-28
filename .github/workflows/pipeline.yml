@@ -1,0 +1,26 @@
+name: Java CI with Maven
+
+on:
+  pull_request:
+    branches:
+      - '*'  # This will trigger the workflow on any branch when a PR is created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'zulu'
+
+    - name: Build with Maven
+      run: mvn clean compile
+
+    - name: Run Tests
+      run: mvn test
